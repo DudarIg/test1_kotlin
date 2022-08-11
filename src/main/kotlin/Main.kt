@@ -20,24 +20,22 @@ class Main {
 
             for (i in 0 until length) {
                 menu[i].click()
-                if (i == 0) {
-                    page0(3)
-                    driver.get("https://swetotehnika.ru")
+                when(i) {
+                    0 -> { page0(5)
+                            driver.get("https://swetotehnika.ru") }
+                    1 -> { page1(5)
+                        driver.get("https://swetotehnika.ru") }
+                    2 -> { page2(5)
+                        driver.get("https://swetotehnika.ru") }
+                    4 -> { page4(5)
+                        driver.get("https://swetotehnika.ru") }
+                    6 -> { page6(5)
+                        driver.get("https://swetotehnika.ru") }
                 }
-                if (i == 1) {
-                    page1(5)
-                    driver.get("https://swetotehnika.ru")
-                }
-                if (i == 2) {
-                    page2(5)
-                    driver.get("https://swetotehnika.ru")
-                }
-                if (i == 4) {
-                    page4(5)
-                    driver.get("https://swetotehnika.ru")
-                }
+
                 menu = driver.findElements(By.cssSelector(".main_menu_item"))
             }
+            Thread.sleep(5000)
             driver.quit()
         }
 
@@ -86,11 +84,17 @@ class Main {
             }
 
         }
+        fun page6(count: Int) {
+            var links : MutableList<WebElement>? = null
+            driver.get("https://swetotehnika.ru/news/")
+            for (i in 1..count) {
+                links = driver.findElements(By.cssSelector(".news-detail-link"))
+                val randoms = (0..links.size-1).random()
+                links[randoms].click()
+                driver.executeScript("window.history.go(-1)")
+            }
 
-
-
-
-
+        }
 
     }
 
