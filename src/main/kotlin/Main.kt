@@ -16,13 +16,24 @@ class Main {
             driver.get("https://swetotehnika.ru")
 
             var menu  = driver.findElements(By.cssSelector(".main_menu_item"))
-            println("${menu.size}")
             val length = menu.size
 
             for (i in 0 until length) {
                 menu[i].click()
                 if (i == 0) {
-                    page0(5)
+                    page0(3)
+                    driver.get("https://swetotehnika.ru")
+                }
+                if (i == 1) {
+                    page1(5)
+                    driver.get("https://swetotehnika.ru")
+                }
+                if (i == 2) {
+                    page2(5)
+                    driver.get("https://swetotehnika.ru")
+                }
+                if (i == 4) {
+                    page4(5)
                     driver.get("https://swetotehnika.ru")
                 }
                 menu = driver.findElements(By.cssSelector(".main_menu_item"))
@@ -31,15 +42,51 @@ class Main {
         }
 
         fun page0(count: Int) {
-            var menu : MutableList<WebElement>? = null
+            var links : MutableList<WebElement>? = null
             driver.get("https://swetotehnika.ru/catalog/")
             for (i in 1..count) {
-                menu = driver.findElements(By.cssSelector(".txt-black"))
-                var rnds = (0..menu.size-1).random()
-                menu[rnds].click()
+                links = driver.findElements(By.cssSelector(".txt-black"))
+                val randoms = (0..links.size-1).random()
+                links[randoms].click()
                 driver.executeScript("window.history.go(-1)")
             }
         }
+
+        fun page1(count: Int) {
+            var links : MutableList<WebElement>? = null
+            driver.get("https://swetotehnika.ru/shop/apparatura_puskoreguliruyushchaya/")
+            for (i in 1..count) {
+                links = driver.findElements(By.cssSelector("a[href^='/shop/']"))
+                val randoms = (0..links.size-1).random()
+                links[randoms].click()
+                driver.executeScript("window.history.go(-1)")
+            }
+
+        }
+        fun page2(count: Int) {
+            var links : MutableList<WebElement>? = null
+            driver.get("https://swetotehnika.ru/services/")
+            for (i in 1..count) {
+                links = driver.findElements(By.cssSelector("a[href^='/services/']"))
+                val randoms = (0..links.size-1).random()
+                links[randoms].click()
+                driver.executeScript("window.history.go(-1)")
+            }
+
+        }
+
+        fun page4(count: Int) {
+            var links : MutableList<WebElement>? = null
+            driver.get("https://swetotehnika.ru/proizvoditeli-svetotekhniki/")
+            for (i in 1..count) {
+                links = driver.findElements(By.cssSelector("a[href^='/proizvoditeli-svetotekhniki/']"))
+                val randoms = (0..links.size-1).random()
+                links[randoms].click()
+                driver.executeScript("window.history.go(-1)")
+            }
+
+        }
+
 
 
 
